@@ -120,6 +120,31 @@ public class MainActivity extends SkinBaseActivity {
 
                 );
                 break;
+
+            case R.id.action_load_local3:
+                SkinManager.getInstance().loadSkin("theme-test.skin", new SkinLoaderListener() {
+                    @Override
+                    public void onStart() {
+                        Log.i("xxxx", "正在切换中。。。。");
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        Log.i("xxxx", "切换成功。。。。");
+                    }
+
+                    @Override
+                    public void onFailed(String errMsg) {
+                        Log.i("xxxx", "切换失败。。。。" + errMsg);
+                    }
+
+                    @Override
+                    public void onProgress(int progress) {
+                        Log.i("xxxx", "皮肤下载中...." + progress);
+                    }
+                });
+                break;
+
             case R.id.action_night_mode:
                 SkinManager.getInstance().nightMode();
                 break;

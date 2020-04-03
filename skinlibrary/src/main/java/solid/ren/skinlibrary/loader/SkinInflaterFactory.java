@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -54,14 +55,18 @@ public class SkinInflaterFactory implements LayoutInflater.Factory2 {
 
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+        Log.e("uuuuu", "===========:" + name);
+        // 获取xml中某个命名空间的属性值
 
         boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.NAMESPACE, SkinConfig.ATTR_SKIN_ENABLE, false);
+
         AppCompatDelegate delegate = mAppCompatActivity.getDelegate();
         View view = delegate.createView(parent, name, context, attrs);
         if (view instanceof TextView && SkinConfig.isCanChangeFont()) {
             TextViewRepository.add(mAppCompatActivity, (TextView) view);
         }
 
+        // 对可换皮肤的view属性解析
         if (isSkinEnable || SkinConfig.isGlobalSkinApply()) {
             if (view == null) {
                 view = ViewProducer.createViewFromTag(context, name, attrs);
@@ -78,11 +83,11 @@ public class SkinInflaterFactory implements LayoutInflater.Factory2 {
      * collect skin view
      */
     private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
-        List<SkinAttr> viewAttrs = new ArrayList<>();
+        List<SkinAttr> viewAttrs = new ArrayList<>(); // 存储view的所有属性
         SkinL.i(TAG, "viewName:" + view.getClass().getSimpleName());
-        for (int i = 0; i < attrs.getAttributeCount(); i++) {
-            String attrName = attrs.getAttributeName(i);
-            String attrValue = attrs.getAttributeValue(i);
+        for (int i = 0; i < attrs.getAttributeCount(); i++) { //遍历当前View的属性
+            String attrName = attrs.getAttributeName(i); // 属性名
+            String attrValue = attrs.getAttributeValue(i); // 属性值
             SkinL.i(TAG, "    AttributeName:" + attrName + "|attrValue:" + attrValue);
             //region  style
             //style theme
@@ -124,7 +129,7 @@ public class SkinInflaterFactory implements LayoutInflater.Factory2 {
                 continue;
             }
             //endregion
-            //if attrValue is reference，eg:@color/red
+            //if attrValue is reference，eg:@color/red 引用类型
             if (AttrFactory.isSupportedAttr(attrName) && attrValue.startsWith("@")) {
                 try {
                     //resource id

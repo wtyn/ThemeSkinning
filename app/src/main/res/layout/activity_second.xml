@@ -12,6 +12,15 @@
     skin:enable="true"
     tools:ignore="MissingPrefix">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="返回"
+        android:textSize="30sp"
+        android:layout_marginLeft="10dp"
+        android:onClick="backLast"/>
+
 
     <ImageView
         android:id="@+id/iv_img"
@@ -57,6 +66,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="wrap_content"

@@ -21,7 +21,8 @@ public class App extends SkinBaseApplication {
         SkinConfig.setDebug(true);
         SkinConfig.addSupportAttr("tabLayoutIndicator", new TabLayoutIndicatorAttr());
         SkinConfig.addSupportAttr("button", new RadioButtonAttr());
-        SkinConfig.enableGlobalSkinApply();
+
+//        SkinConfig.enableGlobalSkinApply();
 
         LeakCanary.install(this);
     }

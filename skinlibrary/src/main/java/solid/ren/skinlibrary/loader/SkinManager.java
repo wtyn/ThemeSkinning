@@ -209,6 +209,8 @@ public class SkinManager implements ISkinLoader {
 
             @Override
             protected void onPostExecute(Resources result) {
+
+                // 主要获取到资源Id
                 mResources = result;
 
                 if (mResources != null) {
@@ -248,6 +250,7 @@ public class SkinManager implements ISkinLoader {
     }
     //endregion
 
+    // 获取对应的资源Id
     //region Resource obtain
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     public int getColor(int resId) {
